@@ -1,0 +1,35 @@
+{
+  "employee": {
+    "name": "John Smith"
+  },
+  "wageLevels": {
+    "1": "12.34",
+    "3": "14.12"
+  },
+  "shifts": [
+    {
+      "start": "2019-06-27T12:00:00",
+      "end": "2019-06-27T23:15:00",
+      "wageLevel": "1",
+      "breakStart": "2019-06-27T17:30:00",
+      "breakDurationMinutes": "45"
+    },
+    {
+      "start": "2019-06-28T08:00:00",
+      "end": "2019-06-28T19:15:00",
+      "wageLevel": "1"
+    },
+    {
+      "start": "2019-06-29T11:00:00",
+      "end": "2019-06-29T18:30:00",
+      "wageLevel": "1"
+    },
+    {
+      "start": "2019-06-30T12:00:00",
+      "end": "2019-06-30T21:15:00",
+      "wageLevel": "3",
+      "breakStart": "2019-06-30T14:30:00",
+      "breakDurationMinutes": "30"
+    }
+  ]
+}

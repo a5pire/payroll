@@ -1,0 +1,14 @@
+{
+    "pay_beyond_twelve_hours":83.295,
+    "duty_beyond_twelve_hours":3.0,
+    "pay_beyond_nine_hours":251.343,
+    "pay_after_six_pm":56.147,
+    "duty_after_six_pm":3.5,
+    "pay_before_six_pm":493.6,
+    "duty_before_six_pm":32.0,
+    "duty_beyond_nine_hours":11.5,
+    "saturday_normal":138.825,
+    "sunday_plus_nine":15.885,
+    "sunday_normal":247.806,
+    "total_pay":1336.901
+}
