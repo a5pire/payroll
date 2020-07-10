@@ -70,20 +70,15 @@ class Weekday:
         if TimeSheet.get_shift_start(shift) + duty_remainder > six_pm:
             if break_start and break_end < six_pm:  # break STARTS and ENDS BEFORE 6pm
                 hours_after_six_pm = (start_plus_remainder - six_pm) - TimeSheet.get_break_duration(shift)
-                return hours_after_six_pm
-
             elif break_start < six_pm < break_end:  # break STARTS BEFORE and ENDS AFTER 6pm
                 break_after_six_pm = TimeSheet.get_break_end(shift) - six_pm
                 hours_after_six_pm = (start_plus_remainder - six_pm) - break_after_six_pm
-                return hours_after_six_pm
-
             else:   # no break spanning AFTER 6pm
                 hours_after_six_pm = timedelta(hours=0, minutes=0)
-                return hours_after_six_pm
-
         else:   # no break within the reminder of duty up to 9hrs
             hours_after_six_pm = timedelta(hours=0, minutes=0)
-            return hours_after_six_pm
+
+        return hours_after_six_pm
 
     @staticmethod
     def hours_before_six_and_less_than_nine(shift):
@@ -96,22 +91,17 @@ class Weekday:
                 .replace(hour=18, minute=0) < TimeSheet.get_shift_end(shift).replace(hour=12, minute=0):
             if break_start and break_end < six_pm:  # break STARTS and ENDS BEFORE 6pm
                 hours_before_six_pm = (TimeSheet.get_shift_start(shift) + six_pm) - TimeSheet.get_break_duration(shift)
-                return hours_before_six_pm
-
             elif break_start < six_pm < break_end:  # break STARTS BEFORE and ENDS AFTER 6pm
                 break_before_six_pm = six_pm - TimeSheet.get_break_start(shift)
                 hours_before_six_pm = (six_pm - TimeSheet.get_shift_start(shift)) - break_before_six_pm
-                return hours_before_six_pm
-
             else:   # no break spanning BEFORE 6pm
                 hours_before_six_pm = TimeSheet.get_shift_end(shift).replace(hour=18, minute=0) - \
                                       TimeSheet.get_shift_start(shift)
-                return hours_before_six_pm
-
         else:   # no break BEFORE 6pm up to 9hrs
             hours_before_six_pm = TimeSheet.get_shift_end(shift).replace(hour=18, minute=0) - \
                                   TimeSheet.get_shift_start(shift)
-            return hours_before_six_pm
+
+        return hours_before_six_pm
 
     @staticmethod
     def pay_beyond_twelve(hours, wage_rate):

@@ -8,33 +8,29 @@ class TimeSheet:
 
     @staticmethod
     def get_wage_level(shift):
-        for data in shift:
-            wage_level = shift['wageLevel']
+        wage_level = shift['wageLevel']
+        for _ in shift:
             return wage_level
 
     @staticmethod
     def get_shift_start(shift):
         start = shift['start']
-        start_time = datetime.strptime(start, '%Y-%m-%dT%H:%M:%S')
-        return start_time
+        return datetime.strptime(start, '%Y-%m-%dT%H:%M:%S')
 
     @staticmethod
     def get_shift_end(shift):
         end = shift['end']
-        end_time = datetime.strptime(end, '%Y-%m-%dT%H:%M:%S')
-        return end_time
+        return datetime.strptime(end, '%Y-%m-%dT%H:%M:%S')
 
     @staticmethod
     def get_shift_length(shift):
-        shift_length = TimeSheet.get_shift_end(shift) - TimeSheet.get_shift_start(shift)
-        return shift_length
+        return TimeSheet.get_shift_end(shift) - TimeSheet.get_shift_start(shift)
 
     @staticmethod
     def get_break_start(shift):
         if shift.get('breakStart'):
             start = shift['breakStart']
-            start_time = datetime.strptime(start, '%Y-%m-%dT%H:%M:%S')
-            return start_time
+            return datetime.strptime(start, '%Y-%m-%dT%H:%M:%S')
 
     @staticmethod
     def get_break_duration(shift):
@@ -50,15 +46,13 @@ class TimeSheet:
         if shift.get('breakStart'):
             start = shift['breakStart']
             start_time = datetime.strptime(start, '%Y-%m-%dT%H:%M:%S')
-            end_time = TimeSheet.get_break_start(shift) + TimeSheet.get_break_duration(shift)
-            return end_time
+            return TimeSheet.get_break_start(shift) + TimeSheet.get_break_duration(shift)
 
     @staticmethod
     def weekdays(shift):
         day_of_week = shift['start']
         day_of_week_obj = datetime.strptime(day_of_week, '%Y-%m-%dT%H:%M:%S')
-        weekday = day_of_week_obj.isoweekday()
-        return weekday
+        return day_of_week_obj.isoweekday()
 
     @staticmethod
     def six_pm_shift_end(shift):
@@ -77,10 +71,10 @@ class TimeSheet:
                 break_after_six_pm = TimeSheet.get_break_end(shift) - six_pm
             else:
                 break_after_six_pm = timedelta(hours=0, minutes=0)
-            return break_after_six_pm
         else:
             break_after_six_pm = timedelta(hours=0, minutes=0)
-            return break_after_six_pm
+
+        return break_after_six_pm
 
     @staticmethod
     def get_normal_hours(shift):

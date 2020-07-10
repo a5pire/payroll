@@ -19,8 +19,6 @@ class Sunday:
                 wage_level = float(shift['wageLevel'])  # get wage level for shift
                 if wage_level == 1:
                     wage_rate = float(self.data['wageLevels']['1'])
-                elif wage_level == 2:
-                    pass
                 elif wage_level == 3:
                     wage_rate = float(self.data['wageLevels']['3'])
 
@@ -46,11 +44,6 @@ class Sunday:
                         else:
                             payslip['sunday_plus_nine'] = round(plus_nine, 3)
 
-                        if 'sunday_normal' in payslip:
-                            payslip['sunday_normal'] += round(normal_hours, 3)
-                        else:
-                            payslip['sunday_normal'] = round(normal_hours, 3)
-
                     elif nett_hours > timedelta(hours=9) <= timedelta(hours=12):  # shift length 9-12hrs
                         plus_nine_hours = nett_hours - timedelta(hours=9)
                         plus_nine = (plus_nine_hours.total_seconds() / 3600 * wage_rate) * 2.25
@@ -61,18 +54,8 @@ class Sunday:
                         else:
                             payslip['sunday_plus_nine'] = round(plus_nine, 3)
 
-                        if 'sunday_normal' in payslip:
-                            payslip['sunday_normal'] += round(normal_hours, 3)
-                        else:
-                            payslip['sunday_normal'] = round(normal_hours, 3)
-
                     else:  # shift length less than 9hrs
                         normal_hours = (nett_hours.total_seconds() / 3600 * wage_rate) * 1.50
-
-                        if 'sunday_normal' in payslip:
-                            payslip['sunday_normal'] += round(normal_hours, 3)
-                        else:
-                            payslip['sunday_normal'] = round(normal_hours, 3)
 
                 else:  # same logic as above with no break during the shift
                     shift_length = TimeSheet.get_shift_length(shift)
@@ -94,11 +77,6 @@ class Sunday:
                         else:
                             payslip['sunday_plus_nine'] = round(plus_nine, 3)
 
-                        if 'sunday_normal' in payslip:
-                            payslip['sunday_normal'] += round(normal_hours, 3)
-                        else:
-                            payslip['sunday_normal'] = round(normal_hours, 3)
-
                     elif shift_length > timedelta(hours=9) <= timedelta(hours=12):  # shift length 9-12hrs
                         plus_nine_hours = shift_length - timedelta(hours=9)
                         plus_nine = (plus_nine_hours.total_seconds() / 3600 * wage_rate) * 2.25
@@ -109,17 +87,12 @@ class Sunday:
                         else:
                             payslip['sunday_plus_nine'] = round(plus_nine, 3)
 
-                        if 'sunday_normal' in payslip:
-                            payslip['sunday_normal'] += round(normal_hours, 3)
-                        else:
-                            payslip['sunday_normal'] = round(normal_hours, 3)
-
                     else:
                         normal_hours = (shift_length.total_seconds() / 3600 * wage_rate) * 1.95
 
-                        if 'sunday_normal' in payslip:
-                            payslip['sunday_normal'] += round(normal_hours, 3)
-                        else:
-                            payslip['sunday_normal'] = round(normal_hours, 3)
+                if 'sunday_normal' in payslip:
+                    payslip['sunday_normal'] += round(normal_hours, 3)
+                else:
+                    payslip['sunday_normal'] = round(normal_hours, 3)
 
         return payslip
